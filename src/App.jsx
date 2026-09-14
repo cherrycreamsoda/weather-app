@@ -7,6 +7,9 @@ function App() {
 //  API key (move to .env file later)
   const apiKey = "52bd10246ea9fc9c8d25119327ee5446";
 
+//  Initialise Input area value
+const [inputValue , setInputValue] = useState("")
+
 //  Initialise and Declair "WeatherState" and log it as it changes
     const [ weatherState , setWeatherState ] = useState(null)
     useEffect(() => {
@@ -43,14 +46,30 @@ function App() {
   }
 
 
-async function handleClick(){
-  fetchWeatherObject("London")
+async function handleFetch(){
+  fetchWeatherObject(inputValue)
 }
 
   return (
     <div className="App">
       <div className="wrapper">
-        <button className="fetch-data-btn" onClick={handleClick}>FETCH!</button>
+        <header className="appHeader">Enter your City Name.</header>
+        <div className="searchArea">
+          <input type="text" className="cityInput" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+          <button className="fetch-data-btn" onClick={handleFetch}>FETCH!</button>
+        </div>
+          {weatherState ? (
+          <div className="weatherCard">
+            <h2>{weatherState.city}, {weatherState.country}</h2>
+            <img src={weatherState.iconUrl} alt={weatherState.description} />
+            <p className="temp">{Math.round(weatherState.temp)}°C</p>
+            <p>{weatherState.group} — {weatherState.description}</p>
+            <p>Feels like {Math.round(weatherState.feelsLike)}°C</p>
+            <p>Humidity: {weatherState.humidity}%</p>
+            <p>Wind: {weatherState.windSpeed} m/s</p>
+          </div>
+        ) : null}
+        <div className="weatherCard"></div>
       </div>
     </div>
   );

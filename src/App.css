@@ -8,7 +8,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.appHeader{
+  color: rgb(102, 102, 102);
+  font-size: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 40px;
+  font-weight: 600;
+}
+
+.cityInput{
+  color: #16171a;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 20px;
+  min-width: 300px;
+  margin-top: 20px;
+  border: #16171a solid 8px;
+  border-radius: 20px;
+  background-color: rgb(108, 108, 108);
+  font-size: 20px
+}
+
+.cityInput:focus{
+  outline: none;
 }
