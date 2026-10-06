@@ -5,8 +5,7 @@ import './App.css';
 
 function App() {
 
-//  API key (move to .env file later)
-  const apiKey = "52bd10246ea9fc9c8d25119327ee5446";
+  const apiKey = process.env.REACT_APP_OPENWEATHER_API_KEY;
 
 //  Initialise Input area value
 const [inputValue , setInputValue] = useState("")
@@ -19,6 +18,9 @@ const [inputValue , setInputValue] = useState("")
 
 //  Fetch Weather object of a country using Openweathermap Weather API and set it's state of 
   async function fetchWeatherObject(country){
+    if (!apiKey) {
+      throw new Error("Weather service is not configured.");
+    }
     const coordinates = await setCoordinatesOf(country)
     const res =  await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`)
     if (!res.ok) {
